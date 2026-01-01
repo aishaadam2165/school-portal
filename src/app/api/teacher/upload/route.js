@@ -3,6 +3,7 @@ import { connectDB } from "@/utils/db";
 import cloudinary from "@/utils/cloudinary";
 import { TeacherApplication } from '@/models/Teachers';
 
+
 export async function POST(req) {
   try {
     await connectDB();
