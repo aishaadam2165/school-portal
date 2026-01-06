@@ -6,8 +6,9 @@ export async function GET() {
   try {
     await connectDB();
     const teachers = await TeacherApplication.find().sort({ createdAt: -1 });
-    return NextResponse.json(teachers);
+    return NextResponse.json({ teachers }); // wrap in object
   } catch (err) {
+    console.error(err);
     return NextResponse.json({ error: "Failed to fetch teachers" }, { status: 500 });
   }
 }

@@ -6,15 +6,20 @@ export default function ApprovedStudentsPage() {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchStudents() {
-      const res = await fetch("/api/students/approved");
-      const data = await res.json();
-      setStudents(data);
-      setLoading(false);
-    }
-    fetchStudents();
-  }, []);
+ useEffect(() => {
+  async function fetchStudents() {
+    const res = await fetch("/api/students/approved", {
+      cache: "no-store", // ✅ IMPORTANT
+    });
+
+    const data = await res.json();
+    setStudents(Array.isArray(data) ? data : []);
+    setLoading(false);
+  }
+
+  fetchStudents();
+}, []);
+
 
   if (loading) return <p>Loading...</p>;
 

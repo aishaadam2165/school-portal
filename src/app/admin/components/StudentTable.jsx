@@ -2,7 +2,7 @@
 
 export default function StudentTable({ students, onApprove, onReject, view }) {
   return (
-    <div className="card mb-4">
+    <div className="card mb-4 w-100">
       <div className="card-header fw-bold">Student Registrations</div>
 
       <div className="card-body table-responsive">

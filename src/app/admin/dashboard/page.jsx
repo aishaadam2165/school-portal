@@ -13,21 +13,30 @@ export default function AdminDashboard() {
   const [activeView, setActiveView] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const fetchData = async () => {
-    setLoading(true);
-    const [sRes, tRes] = await Promise.all([
-      fetch("/api/admin/students"),
-      fetch("/api/admin/teachers"),
-    ]);
+ const fetchData = async () => {
+  setLoading(true);
 
-    setStudents(await sRes.json());
-    setTeachers(await tRes.json());
-    setLoading(false);
-  };
+  const [sRes, tRes] = await Promise.all([
+    fetch("/api/admin/students"),
+    fetch("/api/admin/teachers"),
+  ]);
+
+  const sData = await sRes.json();
+  const tData = await tRes.json();
+
+  setStudents(Array.isArray(sData.students) ? sData.students : []);
+  setTeachers(Array.isArray(tData.teachers) ? tData.teachers : []);
+
+  setLoading(false);
+};
+
 
   useEffect(() => {
-    fetchData();
-  }, []);
+  fetchData(); // initial fetch
+  const interval = setInterval(fetchData, 5000); // fetch every 5 seconds
+  return () => clearInterval(interval); // clean up on unmount
+}, []);
+
 
   const updateStatus = async (id, type, status) => {
     await fetch("/api/admin/update-status", {

@@ -2,7 +2,7 @@
 
 export default function TeacherTable({ teachers, onApprove, onReject, view }) {
   return (
-    <div className="card mb-4">
+    <div className="card mb-4 w-100">
       <div className="card-header fw-bold">Teacher Applications</div>
 
       <div className="card-body table-responsive">
