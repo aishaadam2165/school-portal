@@ -3,7 +3,7 @@ export default function AcademicsPage() {
     <div className="section">
       <h1>Academics</h1>
       <p>
-        Our academic programs are designed to support the intellectual and
+        Our academic programs are designed based on supporting the intellectual and
         personal development of every learner.  
         <br /><br />
         We offer a structured curriculum across:
